@@ -1,0 +1,29 @@
+{
+  "name": "cesium-tools",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "chenkeke <chenkeke@hwunling.com>",
+  "homepage": "https://github.com/icyes/i-tools#readme",
+  "license": "ISC",
+  "main": "lib/cesium-tools.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmmirror.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icyes/i-tools.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/cesium-tools.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/icyes/i-tools/issues"
+  }
+}
