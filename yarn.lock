@@ -6480,7 +6480,6 @@
     "@ctrl/tinycolor" "^3.4.0"
     "classnames" "^2.2.6"
     "copy-to-clipboard" "^3.2.0"
-    "less-loader" "^5.0.0"
     "lodash" "^4.17.21"
     "memoize-one" "^6.0.0"
     "moment" "^2.29.2"
@@ -17113,15 +17112,6 @@
     "nx" ">=14.8.6 < 16"
     "typescript" "^3 || ^4"
 
-"less-loader@^5.0.0":
-  "integrity" "sha512-bquCU89mO/yWLaUq0Clk7qCsKhsF/TZpJUzETRvJa9KSVEL9SO3ovCvdEHISBhrC81OwC8QSVX7E0bzElZj9cg=="
-  "resolved" "https://registry.npmmirror.com/less-loader/-/less-loader-5.0.0.tgz"
-  "version" "5.0.0"
-  dependencies:
-    "clone" "^2.1.1"
-    "loader-utils" "^1.1.0"
-    "pify" "^4.0.1"
-
 "less-loader@^7.1.0":
   "integrity" "sha512-Mi8915g7NMaLlgi77mgTTQvK022xKRQBIVDSyfl3ErTuBhmZBQab0mjeJjNNqGbdR+qrfTleKXqbGI4uEFavxg=="
   "resolved" "https://registry.npmmirror.com/less-loader/-/less-loader-7.3.0.tgz"
@@ -22698,14 +22688,6 @@
     "object-assign" "^4.1.1"
     "scheduler" "^0.20.2"
 
-"react-dom@^18.2.0":
-  "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
-  "resolved" "https://registry.npmmirror.com/react-dom/-/react-dom-18.2.0.tgz"
-  "version" "18.2.0"
-  dependencies:
-    "loose-envify" "^1.1.0"
-    "scheduler" "^0.23.0"
-
 "react-draggable@^4.0.3", "react-draggable@^4.4.3":
   "integrity" "sha512-OMHzJdyJbYTZo4uQE393fHcqqPYsEtkjfMgvCHr6rejT+Ezn4OZbNyGH50vv+SunC1RMvwOTSWkEODQLzw1M9g=="
   "resolved" "https://registry.npmjs.org/react-draggable/-/react-draggable-4.4.5.tgz"
@@ -22947,13 +22929,6 @@
   dependencies:
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
-
-"react@^18.2.0":
-  "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
-  "resolved" "https://registry.npmmirror.com/react/-/react-18.2.0.tgz"
-  "version" "18.2.0"
-  dependencies:
-    "loose-envify" "^1.1.0"
 
 "reactcss@^1.2.0":
   "integrity" "sha512-KiwVUcFu1RErkI97ywr8nvx8dNOpT03rbnma0SSalTYjkrPYaEajR4a/MRt6DZ46K6arDRbWMNHF+xH7G7n/8A=="
@@ -24442,13 +24417,6 @@
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
 
-"scheduler@^0.23.0":
-  "integrity" "sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw=="
-  "resolved" "https://registry.npmmirror.com/scheduler/-/scheduler-0.23.0.tgz"
-  "version" "0.23.0"
-  dependencies:
-    "loose-envify" "^1.1.0"
-
 "schema-utils@^1.0.0":
   "integrity" "sha512-i27Mic4KovM/lnGsy8whRCHhc7VicJajAjTrYg11K9zfZXnYIt4k5F+kZkwjnrhKzLic/HLU4j11mjsz2G/75g=="
   "resolved" "https://registry.npmjs.org/schema-utils/-/schema-utils-1.0.0.tgz"
@@ -25769,16 +25737,11 @@
 
 "style-loader@^2.0.0":
   "integrity" "sha512-Z0gYUJmzZ6ZdRUqpg1r8GsaFKypE+3xAzuFeMuoHgjc9KZv3wMyCRjQIWEbhoFSq7+7yoHXySDJyyWQaPajeiQ=="
-  "resolved" "https://registry.npmmirror.com/style-loader/-/style-loader-2.0.0.tgz"
+  "resolved" "https://registry.npmjs.org/style-loader/-/style-loader-2.0.0.tgz"
   "version" "2.0.0"
   dependencies:
     "loader-utils" "^2.0.0"
     "schema-utils" "^3.0.0"
-
-"style-loader@^3.3.1":
-  "integrity" "sha512-GPcQ+LDJbrcxHORTRes6Jy2sfvK2kS6hpSfI/fXhPt+spVzxF6LJ1dHLN9zIGmVaaP044YKaIatFaufENRiDoQ=="
-  "resolved" "https://registry.npmmirror.com/style-loader/-/style-loader-3.3.1.tgz"
-  "version" "3.3.1"
 
 "style-search@^0.1.0":
   "integrity" "sha512-Dj1Okke1C3uKKwQcetra4jSuk0DqbzbYtXipzFlFMZtowbF1x7BKJwB9AayVMyFARvU8EDrZdcax4At/452cAg=="
