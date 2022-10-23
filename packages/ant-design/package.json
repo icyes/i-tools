@@ -1,8 +1,7 @@
 {
-  "name": "antd",
+  "name": "i-antd",
   "version": "4.23.6",
   "description": "An enterprise-class UI design language and React components implementation",
-  "title": "Ant Design",
   "keywords": [
     "ant",
     "component",
@@ -22,18 +21,13 @@
     "type": "git",
     "url": "https://github.com/ant-design/ant-design"
   },
-  "license": "MIT",
-  "contributors": [
-    "ant"
-  ],
   "funding": {
     "type": "opencollective",
     "url": "https://opencollective.com/ant-design"
   },
-  "files": [
-    "dist",
-    "lib",
-    "es"
+  "license": "MIT",
+  "contributors": [
+    "ant"
   ],
   "sideEffects": [
     "dist/*",
@@ -42,33 +36,37 @@
     "*.less"
   ],
   "main": "lib/index.js",
-  "module": "es/index.js",
   "unpkg": "dist/antd.min.js",
+  "module": "es/index.js",
   "typings": "lib/index.d.ts",
+  "files": [
+    "dist",
+    "lib",
+    "es"
+  ],
   "scripts": {
-    "prepare": "husky install",
     "api-collection": "antd-tools run api-collection",
+    "argos": "node ./scripts/argos-upload.js",
     "authors": "node ./scripts/generate-authors",
     "build": "npm run compile && NODE_OPTIONS='--max-old-space-size=4096' npm run dist",
     "bundlesize": "bundlesize",
-    "size-limit": "size-limit",
+    "changelog": "node ./scripts/print-changelog",
     "check-commit": "node ./scripts/check-commit",
     "check-ts-demo": "node ./scripts/check-ts-demo",
     "clean": "antd-tools run clean && rm -rf es lib coverage dist report.html",
     "clean-lockfiles": "rm -rf package-lock.json yarn.lock",
-    "prestart": "npm run version",
     "precompile": "npm run version",
-    "pretest": "npm run version",
-    "predist": "npm run version",
-    "presite": "npm run version",
     "compile": "npm run clean && antd-tools run compile",
-    "changelog": "node ./scripts/print-changelog",
     "predeploy": "antd-tools run clean && npm run site && cp CNAME _site && npm run site:test",
     "deploy": "bisheng gh-pages --push-only --dotfiles",
     "deploy:china-mirror": "git checkout gh-pages && git pull origin gh-pages && git push git@gitee.com:ant-design/ant-design.git gh-pages",
+    "predist": "npm run version",
     "dist": "antd-tools run dist",
     "dist:esbuild": "ESBUILD=true npm run dist",
     "dist:esbuild-no-dup-check": "ESBUILD=true NO_DUP_CHECK=true npm run dist",
+    "install-react-16": "npm i --no-save --legacy-peer-deps react@16 react-dom@16",
+    "install-react-17": "npm i --no-save --legacy-peer-deps react@17 react-dom@17",
+    "install-react-18": "npm i --no-save --legacy-peer-deps react@18 react-dom@18 @testing-library/react@13",
     "lint": "npm run tsc && npm run lint:script && npm run lint:demo && npm run lint:style && npm run lint:deps && npm run lint:md",
     "lint-fix": "npm run lint-fix:script && npm run lint-fix:demo && npm run lint-fix:style",
     "lint-fix:demo": "npm run lint:demo -- --fix",
@@ -80,30 +78,31 @@
     "lint:script": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:style": "stylelint '{site,components}/**/*.less'",
     "pre-publish": "npm run test-all -- --skip-build",
+    "prepare": "cd ../.. && husky install packages/ant-design/.husky",
+    "prepublishOnly": "antd-tools run guard",
     "prettier": "prettier -c --write **/*",
     "pretty-quick": "pretty-quick",
     "pub": "npm run version && antd-tools run pub",
-    "prepublishOnly": "antd-tools run guard",
     "postpublish": "node ./scripts/post-script.js",
-    "site:theme": "npm run site:theme-dark && npm run site:theme-compact",
-    "site:theme-dark": "cross-env ESBUILD=1 ANT_THEME=dark bisheng build -c ./site/bisheng.config.js",
-    "site:theme-compact": "cross-env ESBUILD=1 ANT_THEME=compact bisheng build -c ./site/bisheng.config.js",
+    "presite": "npm run version",
     "site": "npm run site:theme && cross-env NODE_ICU_DATA=node_modules/full-icu ESBUILD=1 bisheng build --ssr -c ./site/bisheng.config.js",
+    "site:test": "jest --config .jest.site.js --cache=false --force-exit",
+    "site:theme": "npm run site:theme-dark && npm run site:theme-compact",
+    "site:theme-compact": "cross-env ESBUILD=1 ANT_THEME=compact bisheng build -c ./site/bisheng.config.js",
+    "site:theme-dark": "cross-env ESBUILD=1 ANT_THEME=dark bisheng build -c ./site/bisheng.config.js",
+    "size-limit": "size-limit",
     "sort": "npx sort-package-json",
     "sort-api": "antd-tools run sort-api-table",
+    "prestart": "npm run version",
     "start": "antd-tools run clean && cross-env NODE_ENV=development concurrently \"bisheng start -c ./site/bisheng.config.js\"",
+    "pretest": "npm run version",
     "test": "jest --config .jest.js --cache=false",
-    "test:update": "jest --config .jest.js --cache=false -u",
     "test-all": "sh -e ./scripts/test-all.sh",
-    "test-node": "jest --config .jest.node.js --cache=false",
-    "tsc": "tsc --noEmit",
-    "site:test": "jest --config .jest.site.js --cache=false --force-exit",
     "test-image": "jest --config .jest.image.js --no-cache -i -u",
-    "argos": "node ./scripts/argos-upload.js",
-    "version": "node ./scripts/generate-version",
-    "install-react-16": "npm i --no-save --legacy-peer-deps react@16 react-dom@16",
-    "install-react-17": "npm i --no-save --legacy-peer-deps react@17 react-dom@17",
-    "install-react-18": "npm i --no-save --legacy-peer-deps react@18 react-dom@18 @testing-library/react@13"
+    "test-node": "jest --config .jest.node.js --cache=false",
+    "test:update": "jest --config .jest.js --cache=false -u",
+    "tsc": "tsc --noEmit",
+    "version": "node ./scripts/generate-version"
   },
   "browserslist": [
     "> 0.5%",
@@ -303,28 +302,6 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "size-limit": [
-    {
-      "path": "./dist/antd.min.js",
-      "limit": "282 kB"
-    },
-    {
-      "path": "./dist/antd.min.css",
-      "limit": "66 kB"
-    },
-    {
-      "path": "./dist/antd.dark.min.css",
-      "limit": "67.5 kB"
-    },
-    {
-      "path": "./dist/antd.compact.min.css",
-      "limit": "66 kB"
-    },
-    {
-      "path": "./dist/antd.variable.min.css",
-      "limit": "67 kB"
-    }
-  ],
   "bundlesize": [
     {
       "path": "./dist/antd.min.js",
@@ -347,6 +324,29 @@
       "maxSize": "67 kB"
     }
   ],
+  "size-limit": [
+    {
+      "path": "./dist/antd.min.js",
+      "limit": "282 kB"
+    },
+    {
+      "path": "./dist/antd.min.css",
+      "limit": "66 kB"
+    },
+    {
+      "path": "./dist/antd.dark.min.css",
+      "limit": "67.5 kB"
+    },
+    {
+      "path": "./dist/antd.compact.min.css",
+      "limit": "66 kB"
+    },
+    {
+      "path": "./dist/antd.variable.min.css",
+      "limit": "67 kB"
+    }
+  ],
+  "title": "Ant Design",
   "tnpm": {
     "mode": "npm"
   }
