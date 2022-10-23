@@ -1,5 +1,11 @@
 import "./App.css";
-import Menu from "../../../src/view/menu/menu";
+import Menu from "./view/menu/menu";
+import { useEffect } from "react";
+
+//引入cesium
+import * as Cesium from "cesium/Cesium";
+import { CESIUM_TOKEN } from "./config";
+Cesium.Ion.defaultAccessToken = CESIUM_TOKEN;
 
 function App() {
   useEffect(() => {
@@ -65,7 +71,7 @@ function App() {
   return (
     <div className="App flex">
       <Menu></Menu>
-      <div id="cesiumContainer"></div>
+      <div id="cesiumContainer" className={"flex-1"}></div>
     </div>
   );
 }
