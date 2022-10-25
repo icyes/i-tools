@@ -3,9 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "cesium/Widgets/widgets.css";
 import "tailwindcss/tailwind.css";
 import "antd/dist/antd.min.css";
+
+//引入cesium
+import "./Cesium";
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
