@@ -21,4 +21,7 @@ const fn = function ({ viewer }) {
   return fn;
 };
 
-export default fn;
+export default {
+  name: "画立方体",
+  code: fn,
+};

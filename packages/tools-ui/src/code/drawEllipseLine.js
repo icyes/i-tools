@@ -1,6 +1,6 @@
 import { Cesium } from "@/Cesium";
 
-export default function fn({ viewer }) {
+function fn({ viewer }) {
   var entity = viewer.entities.add({
     position: Cesium.Cartesian3.fromDegrees(-103.0, 40.0),
     ellipse: {
@@ -20,3 +20,8 @@ export default function fn({ viewer }) {
   });
   return fn;
 }
+
+export default {
+  name: "画椭圆网格线",
+  code: fn,
+};

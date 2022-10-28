@@ -1,6 +1,6 @@
 import { Cesium } from "@/Cesium";
 
-export default function fn({ viewer }) {
+function code({ viewer }) {
   var entity = viewer.entities.add({
     polyline: {
       positions: Cesium.Cartesian3.fromDegreesArray([-77, 35, -77.1, 35]),
@@ -15,5 +15,10 @@ export default function fn({ viewer }) {
     glowPower: 0.2,
     color: Cesium.Color.BLUE,
   });
-  return fn;
+  return code;
 }
+
+export default {
+  name: "画线",
+  code,
+};
