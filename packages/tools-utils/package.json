@@ -1,0 +1,29 @@
+{
+  "name": "tools-utils",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "homepage": "https://github.com/icyes/i-tools#readme",
+  "bugs": {
+    "url": "https://github.com/icyes/i-tools/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icyes/i-tools.git"
+  },
+  "license": "ISC",
+  "author": "chenkeke <chenkeke@hwunling.com>",
+  "main": "lib/tools-utils.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/tools-utils.test.js"
+  },
+  "publishConfig": {
+    "registry": "http://81.69.41.234:4873/"
+  }
+}
