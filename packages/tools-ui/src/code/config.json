@@ -1,3 +1,6 @@
 {
-  "name": "代码工具箱"
+  "name": "代码工具箱",
+  "type": "dir",
+  "key": "root",
+  "icon": "BranchesOutlined"
 }

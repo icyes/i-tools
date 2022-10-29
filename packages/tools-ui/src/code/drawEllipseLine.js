@@ -23,5 +23,5 @@ function fn({ viewer }) {
 
 export default {
   name: "画椭圆网格线",
-  code: fn,
+  fn,
 };

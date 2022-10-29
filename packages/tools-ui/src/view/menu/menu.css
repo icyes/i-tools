@@ -1,3 +1,8 @@
+.menu {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 .menu-container {
   z-index: 2;
   width: 200px;

@@ -1,9 +1,8 @@
-const code = function (args) {
+const fn = function (args) {
   console.log("Hello world!", args);
-  return code;
+  return fn;
 };
 
 export default {
-  name: "测试",
-  code,
+  fn,
 };
