@@ -1,0 +1,24 @@
+.tabs-side {
+  width: 300px;
+
+  .ant-tabs-nav-list {
+    width: 100%;
+
+    .ant-tabs-tab {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+
+  .ant-tabs-content {
+    height: 100%;
+
+    .ant-tabs-tabpane {
+      height: 100%;
+
+      .edit-container {
+        height: 100%;
+      }
+    }
+  }
+}

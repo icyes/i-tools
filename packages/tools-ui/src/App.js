@@ -1,11 +1,18 @@
 import "./App.css";
-import Menu from "./view/menu/menu";
+import SideBar from "./view/side-tabs";
+import CesiumBox from "./view/cesium-box";
+import { useCallback, useState } from "react";
 
 function App() {
+  const [code, setCode] = useState();
+  const menuClick = useCallback(({ fn }) => {
+    setCode(fn && fn.toString());
+  }, []);
+
   return (
     <div className="App flex">
-      <Menu></Menu>
-      <div id="cesiumContainer" className={"flex-1"}></div>
+      <SideBar></SideBar>
+      <CesiumBox></CesiumBox>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Cesium } from "@/Cesium";
+import { Cesium } from "@/cesium-tools";
 
 const fn = function ({ viewer }) {
   let entities = viewer.entities.add({

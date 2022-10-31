@@ -2,7 +2,6 @@ import { MenuUnfoldOutlined, ProfileOutlined } from "@ant-design/icons";
 import * as Icons from "@ant-design/icons";
 import { Menu } from "i-antd";
 import React, { useLayoutEffect, useState } from "react";
-import { Cesium } from "@/Cesium";
 import "./menu.css";
 
 function isObject(obj) {
@@ -141,37 +140,29 @@ const dirContext = require.context("@/code", true, /\.js|json$/);
 const dirTree = traversalDirectory(dirContext, "code");
 const items = setMenu(dirTree);
 
-const App = () => {
-  const [viewer, setViewer] = useState();
-  useLayoutEffect(() => {
-    const viewer = new Cesium.Viewer("cesiumContainer", {
-      infoBox: false,
-      // terrainProvider: Cesium.createWorldTerrain()
-    });
-    setViewer(viewer);
-    return () => viewer.destroy();
-  }, []);
-
+const App = (props) => {
   const onMenuClick = ({ key }) => {
-    viewer.entities.removeAll();
     try {
-      const { fn } = require(`@/${key}`).default;
+      const reqItem = require(`@/${key}`).default;
+      const { fn } = reqItem;
       typeof fn === "function" && fn({ viewer });
+      if (props && typeof props.handleClick === "function") {
+        props.handleClick(reqItem, viewer);
+      }
     } catch (e) {
       console.log(e);
     }
   };
   return (
-    <Menu
-      mode="inline"
-      style={{
-        width: 256,
-      }}
-      className="menu"
-      defaultOpenKeys={["root"]}
-      items={items}
-      onClick={onMenuClick}
-    />
+    <div>
+      <Menu
+        mode="inline"
+        className="menu"
+        defaultOpenKeys={["root"]}
+        items={items}
+        onClick={onMenuClick}
+      />
+    </div>
   );
 };
 export default App;

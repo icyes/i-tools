@@ -73,6 +73,9 @@ const cesiumWorkers = "../Build/Cesium/Workers";
 const fileFolder = "src";
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
+//monaco
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
+
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
@@ -633,6 +636,9 @@ module.exports = function (webpackEnv) {
           // { from: path.join(fileFolder, 'data'), to: 'Data'}
         ],
       }),
+
+      //  monaco
+      new MonacoWebpackPlugin(),
 
       // Makes some environment variables available to the JS code, for example:
       // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.

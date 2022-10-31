@@ -1,0 +1,11 @@
+.edit-container {
+  flex: 0 0 300px;
+
+  .monaco-editor .view-overlays .current-line {
+    border: none;
+  }
+
+  .monaco-editor .view-line {
+    text-align: left;
+  }
+}

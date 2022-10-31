@@ -7,7 +7,7 @@ import "tailwindcss/tailwind.css";
 import "antd/dist/antd.min.css";
 
 //引入cesium
-import "./Cesium";
+import "./cesium-tools";
 
 ReactDOM.render(
   <React.StrictMode>
