@@ -1,6 +1,4 @@
-import { Cesium } from "@/cesium-tools";
-
-function fn({ viewer }) {
+function fn({ viewer, Cesium }) {
   var entity = viewer.entities.add({
     polyline: {
       positions: Cesium.Cartesian3.fromDegreesArray([-77, 35, -77.1, 35]),

@@ -1,5 +1,7 @@
 .edit-container {
+  display: flex;
   flex: 0 0 300px;
+  flex-flow: column;
 
   .monaco-editor .view-overlays .current-line {
     border: none;
@@ -7,5 +9,10 @@
 
   .monaco-editor .view-line {
     text-align: left;
+  }
+
+  #monacoEdit {
+    flex: 1;
+    height: 100%;
   }
 }

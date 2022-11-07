@@ -1,6 +1,4 @@
-import { Cesium } from "@/cesium-tools";
-
-function fn({ viewer }) {
+function fn({ viewer, Cesium }) {
   var entity = viewer.entities.add({
     position: Cesium.Cartesian3.fromDegrees(-103.0, 40.0),
     ellipse: {

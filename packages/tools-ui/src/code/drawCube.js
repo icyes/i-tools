@@ -1,6 +1,4 @@
-import { Cesium } from "@/cesium-tools";
-
-const fn = function ({ viewer }) {
+const fn = function ({ viewer, Cesium }) {
   let entities = viewer.entities.add({
     polygon: {
       hierarchy: Cesium.Cartesian3.fromDegreesArray([

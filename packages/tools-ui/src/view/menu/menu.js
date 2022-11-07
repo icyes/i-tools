@@ -3,6 +3,8 @@ import * as Icons from "@ant-design/icons";
 import { Menu } from "i-antd";
 import React, { useLayoutEffect, useState } from "react";
 import "./menu.css";
+import useStore from "@/stores/index.js";
+import { Cesium } from "@/cesium-tools";
 
 function isObject(obj) {
   return Object.prototype.toString.call(obj) === "[object Object]";
@@ -141,14 +143,15 @@ const dirTree = traversalDirectory(dirContext, "code");
 const items = setMenu(dirTree);
 
 const App = (props) => {
+  const { map, codeEdit } = useStore();
   const onMenuClick = ({ key }) => {
     try {
       const reqItem = require(`@/${key}`).default;
       const { fn } = reqItem;
-      typeof fn === "function" && fn({ viewer });
-      if (props && typeof props.handleClick === "function") {
-        props.handleClick(reqItem, viewer);
-      }
+      const viewer = map.viewer;
+      map.clear();
+      typeof fn === "function" && fn({ viewer, Cesium });
+      codeEdit.setCode(fn.toString());
     } catch (e) {
       console.log(e);
     }

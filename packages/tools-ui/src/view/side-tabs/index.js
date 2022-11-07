@@ -3,10 +3,14 @@ import { useCallback } from "react";
 import "./index.scss";
 import Menu from "@/view/menu/menu";
 import Edit from "@/view/edit";
+import useStore from "@/stores";
 
 export default function App() {
+  const { codeEdit } = useStore();
   const onChange = useCallback((val) => {
-    console.log("[mLog] val -->", val);
+    if (val === "code") {
+      codeEdit.setValue();
+    }
   }, []);
   return (
     <Tabs
