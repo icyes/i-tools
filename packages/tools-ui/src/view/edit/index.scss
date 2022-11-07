@@ -3,12 +3,29 @@
   flex: 0 0 300px;
   flex-flow: column;
 
+  .edit-tools {
+    margin-top: -16px;
+    padding: 4px 0;
+    text-align: right;
+    background: rgba(30, 144, 255, 0.3);
+
+    .anticon {
+      vertical-align: 0;
+    }
+
+    .ant-btn + .ant-btn {
+      margin-left: 5px;
+    }
+  }
+
   .monaco-editor .view-overlays .current-line {
     border: none;
   }
 
   .monaco-editor .view-line {
     text-align: left;
+  }
+  .monaco-editor {
   }
 
   #monacoEdit {

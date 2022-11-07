@@ -40,13 +40,35 @@ export default function (props) {
     codeEdit.format();
   }, []);
 
+  const doRest = useCallback(() => {
+    codeEdit.reset();
+  }, []);
+
   return (
     <div className={"edit-container"}>
       <div className={"edit-tools"}>
-        <Button type="primary" icon={<RightCircleOutlined />} size={"mini"}>
+        <Button
+          type="primary"
+          icon={<RightCircleOutlined />}
+          size={"small"}
+          onClick={doRest}
+        >
+          重置
+        </Button>
+        <Button
+          type="primary"
+          icon={<RightCircleOutlined />}
+          size={"small"}
+          onClick={doRun}
+        >
           运行
         </Button>
-        <Button type="primary" icon={<ReloadOutlined />} size={"mini"}>
+        <Button
+          type="primary"
+          icon={<ReloadOutlined />}
+          size={"small"}
+          onClick={doFormat}
+        >
           格式化
         </Button>
       </div>

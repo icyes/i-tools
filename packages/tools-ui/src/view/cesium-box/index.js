@@ -3,7 +3,7 @@ import { Cesium } from "@/cesium-tools";
 import useStore from "@/stores/index.js";
 
 export default function App() {
-  const { map } = useStore();
+  const { map, codeEdit } = useStore();
   const [viewer, setViewer] = useState();
 
   useLayoutEffect(() => {
@@ -11,6 +11,7 @@ export default function App() {
       infoBox: false,
     });
     map.setViewer(viewer);
+    codeEdit.setMap(map);
     setViewer(viewer);
     return () => viewer.destroy();
   }, []);

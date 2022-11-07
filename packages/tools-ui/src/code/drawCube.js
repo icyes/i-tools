@@ -1,4 +1,4 @@
-const fn = function ({ viewer, Cesium }) {
+function fn({ viewer, Cesium }) {
   let entities = viewer.entities.add({
     polygon: {
       hierarchy: Cesium.Cartesian3.fromDegreesArray([
@@ -8,16 +8,16 @@ const fn = function ({ viewer, Cesium }) {
         -111.047063, 42.000709, -111.047063, 44.476286, -111.05254, 45.002073,
       ]),
       height: 100,
-      material: Cesium.Color.RED.withAlpha(0.5),
+      material: Cesium.Color.BLACK.withAlpha(0.3),
       outline: true,
-      outlineColor: Cesium.Color.BLACK,
+      outlineColor: Cesium.Color.WHITE,
     },
   });
   entities.polygon.height = 0;
   entities.polygon.extrudedHeight = 250000;
   viewer.flyTo(entities);
   return fn;
-};
+}
 
 export default {
   name: "画立方体",

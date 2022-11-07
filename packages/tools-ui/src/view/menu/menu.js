@@ -149,9 +149,11 @@ const App = (props) => {
       const reqItem = require(`@/${key}`).default;
       const { fn } = reqItem;
       const viewer = map.viewer;
+      const args = { viewer, Cesium };
       map.clear();
-      typeof fn === "function" && fn({ viewer, Cesium });
+      typeof fn === "function" && fn(args);
       codeEdit.setCode(fn.toString());
+      codeEdit.setArgs(args);
     } catch (e) {
       console.log(e);
     }
