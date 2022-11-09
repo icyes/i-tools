@@ -19,7 +19,7 @@ class CodeEdit {
   }
   layout() {
     setTimeout(() => {
-      this.editor.layout();
+      this.editor && this.editor.layout();
     }, 0);
   }
 

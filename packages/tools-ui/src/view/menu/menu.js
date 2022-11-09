@@ -1,14 +1,10 @@
 import { MenuUnfoldOutlined, ProfileOutlined } from "@ant-design/icons";
-import * as Icons from "@ant-design/icons";
 import { Menu } from "i-antd";
-import React, { useLayoutEffect, useState } from "react";
+import React from "react";
 import "./menu.css";
 import useStore from "@/stores/index.js";
 import { Cesium } from "@/cesium-tools";
-
-function isObject(obj) {
-  return Object.prototype.toString.call(obj) === "[object Object]";
-}
+import { isObject, getIconByName, getFileName, getUuid } from "@/utils";
 
 /**
  * 遍历srcx下目标文件夹下的所有文件
@@ -16,6 +12,7 @@ function isObject(obj) {
  * @param {Object} dirContext
  * @param {String} targetDir 目标文件夹名
  * @param {Object} [options]
+ * @returns {Object} { [fileName]: { name, key, icon, menuType } }
  */
 function traversalDirectory(dirContext, targetDir, options) {
   if (!dirContext) {
@@ -36,8 +33,8 @@ function traversalDirectory(dirContext, targetDir, options) {
     let pathLevel = subPath.split("/");
     let currentLevel = fileTree;
 
-    pathLevel.forEach((m, i) => {
-      const fileName = getFileName(m);
+    pathLevel.forEach((fullFileName, i) => {
+      const [fileName, suffix] = getFileName(fullFileName);
       // 如果是文件
       if (i === pathLevel.length - 1) {
         if (!currentLevel[fieldValue]) {
@@ -47,7 +44,8 @@ function traversalDirectory(dirContext, targetDir, options) {
         let resData, res;
         resData = require(`@/${filePath}`);
         // 当前目录配置文件
-        if (m.includes("json")) {
+        if (fullFileName === "config.json") {
+          // 将配置文件中的数据合并到当前目录对象中
           Object.assign(currentLevel, resData);
         } else {
           res = resData && resData.default;
@@ -64,7 +62,7 @@ function traversalDirectory(dirContext, targetDir, options) {
         }
       } else {
         // 如果是目录
-        if (!currentLevel[m]) {
+        if (!currentLevel[fullFileName]) {
           currentLevel[fileName] = {
             type: "dir",
             name: fileName,
@@ -78,18 +76,9 @@ function traversalDirectory(dirContext, targetDir, options) {
   return fileTree;
 }
 
-// 去除文件名后缀
-function getFileName(fileStr) {
-  return fileStr && fileStr.split(".")[0];
-}
-
-function getIconByName(name) {
-  return name && Icons[name] && React.createElement(Icons[name]);
-}
-
 // 获取code文件夹下的所有文件结构
 
-function getItem(label, key, icon_, children, type) {
+function getItem(label, key, icon_, children, type, codeType) {
   const icon = typeof icon_ === "string" ? getIconByName(icon_) : icon_;
   return {
     key: key || getUuid(),
@@ -97,13 +86,8 @@ function getItem(label, key, icon_, children, type) {
     children,
     label,
     type,
+    "code-type": codeType,
   };
-}
-
-function getUuid(length = 8) {
-  return Number(
-    Math.random().toString().substr(3, length) + Date.now()
-  ).toString(36);
 }
 
 function setMenu(tree) {
@@ -111,9 +95,20 @@ function setMenu(tree) {
 
   function recurveTree(tree, result) {
     let children = (result.children = []);
+    let rootCodeType = tree.codeType;
+
+    // 目录
     if (isObject(tree) && tree.type === "dir") {
-      const { name, key, icon = <MenuUnfoldOutlined />, menuType } = tree;
-      result.push(getItem(name, key, icon, children, menuType));
+      const {
+        name,
+        key,
+        icon = <MenuUnfoldOutlined />,
+        menuType,
+        codeType,
+      } = tree;
+      result.push(
+        getItem(name, key, icon, children, menuType, codeType || rootCodeType)
+      );
     }
 
     isObject(tree) &&
@@ -126,8 +121,16 @@ function setMenu(tree) {
         // 文件
         if (keyName === "value") {
           item.forEach((item) => {
-            const { name, key, icon = <ProfileOutlined />, menuType } = item;
-            children.push(getItem(name, key, icon, null, menuType));
+            const {
+              name,
+              key,
+              icon = <ProfileOutlined />,
+              menuType,
+              codeType,
+            } = item;
+            children.push(
+              getItem(name, key, icon, null, menuType, codeType || rootCodeType)
+            );
           });
         }
       });
@@ -143,19 +146,30 @@ const dirTree = traversalDirectory(dirContext, "code");
 const items = setMenu(dirTree);
 
 const App = (props) => {
-  const { map, codeEdit } = useStore();
-  const onMenuClick = ({ key }) => {
+  const { map, codeEdit, stage } = useStore();
+  const onMenuClick = (menu) => {
+    const { key, item } = menu;
+    // 设置代码类型
+    stage.setCodeType(item.props["code-type"]);
     try {
       const reqItem = require(`@/${key}`).default;
-      const { fn } = reqItem;
-      const viewer = map.viewer;
-      const args = { viewer, Cesium };
-      map.clear();
-      typeof fn === "function" && fn(args);
-      codeEdit.setCode(fn.toString());
-      codeEdit.setArgs(args);
+      if (reqItem && reqItem.fn) {
+        const { fn } = reqItem;
+        const viewer = map.viewer;
+        const args = { viewer, Cesium };
+
+        // 保存当前编辑的代码
+        codeEdit.setCode(fn.toString());
+        // 保存当前编辑的代码的参数
+        codeEdit.setArgs(args);
+        // 清楚地图上的所有图层
+        map.clear();
+
+        // 执行代码
+        typeof fn === "function" && fn(args);
+      }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
   return (

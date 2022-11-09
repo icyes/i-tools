@@ -1,12 +1,12 @@
 import "./App.css";
 import SideBar from "./view/side-tabs";
-import CesiumBox from "./view/cesium-box";
+import Stage from "./view/stage";
 
 function App() {
   return (
     <div className="App flex">
       <SideBar />
-      <CesiumBox></CesiumBox>
+      <Stage />
     </div>
   );
 }
